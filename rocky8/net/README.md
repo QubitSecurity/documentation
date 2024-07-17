@@ -35,6 +35,23 @@
     
     PROMISC=yes
 
+### 3.3 promisc mode service 
+    promisc mode service file
+    vi /etc/systemd/system/promisc.service
+    
+    [Unit]
+    Description=Port Mirror
+    After=network.target
+    
+    [Service]
+    Type=oneshot
+    ExecStart=/sbin/ifconfig enp1s0  promisc
+    ExecStop=/sbin/ifconfig enp1s0 -promisc
+    RemainAfterExit=yes
+    
+    [Install]
+    WantedBy=multi-user.target
+
 ## 4. Port mirror
 
 ### 4.1 go to network-scripts
